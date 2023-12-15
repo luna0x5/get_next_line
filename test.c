@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 // int main()
 // {
@@ -52,5 +53,50 @@
 // 	printf("my buffer contains : %s\n", s);
 // 	printf("how much I read : %d\n", count);
 // 	free(s);
-
 // }
+
+char *read_line(int fd)
+{
+    char *line;
+    char *temp;
+    char c;
+    size_t currentLength;
+    int bytesRead;
+
+    line = NULL;
+    while ((bytesRead = read(fd, &c, 1)) > 0)
+    {
+        currentLength = 0;
+        if (c == '\n')
+            break;
+        if (line == NULL)
+            currentLength = 0;
+        else
+            currentLength = strlen(line);
+
+        temp = malloc(currentLength + 1);
+        if (temp == NULL)
+            return (NULL);
+        if (line != NULL)
+            strcpy(temp, line);
+        temp[currentLength] = c;
+        temp[currentLength + 1] = '\0';
+        line = temp;
+    }
+    if (bytesRead == -1)
+        return (NULL);
+    return (line);
+}
+
+int main(void)
+{
+    char *line;
+
+    int fd = open("test.txt", O_CREAT | O_RDWR, 0777);
+    while ((line = read_line(fd)) != NULL)
+    {
+        printf("%s\n", line);
+    }
+    close(fd);
+}
+
