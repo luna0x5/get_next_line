@@ -1,5 +1,4 @@
-hello
-this is just a test
-this is the third line
+Hello this is a test
+I write into this file using write
+and this is the third line
 and this is the fourth
-it doesn't really matter but this is the fifth

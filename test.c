@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "get_next_line.h"
+
 // int main()
 // {
 // 	int fd = creat("text.txt", 0777);
@@ -55,48 +57,49 @@
 // 	free(s);
 // }
 
-char *read_line(int fd)
-{
-    char *line;
-    char *temp;
-    char c;
-    size_t currentLength;
-    int bytesRead;
+// char *read_line(int fd)
+// {
+//     char *line;
+//     char *temp;
+//     char c;
+//     size_t currentLength;
+//     int bytesRead;
 
-    line = NULL;
-    while ((bytesRead = read(fd, &c, 1)) > 0)
-    {
-        currentLength = 0;
-        if (c == '\n')
-            break;
-        if (line == NULL)
-            currentLength = 0;
-        else
-            currentLength = strlen(line);
+//     line = NULL;
+//     while ((bytesRead = read(fd, &c, 1)) > 0)
+//     {
+//         currentLength = 0;
+//         if (c == '\n')
+//             break;
+//         if (line == NULL)
+//             currentLength = 0;
+//         else
+//             currentLength = strlen(line);
 
-        temp = malloc(currentLength + 1);
-        if (temp == NULL)
-            return (NULL);
-        if (line != NULL)
-            strcpy(temp, line);
-        temp[currentLength] = c;
-        temp[currentLength + 1] = '\0';
-        line = temp;
-    }
-    if (bytesRead == -1)
-        return (NULL);
-    return (line);
-}
+//         temp = malloc(currentLength + 2);
+//         if (temp == NULL)
+//             return (NULL);
+//         if (line != NULL)
+//             strcpy(temp, line);
+//         temp[currentLength] = c;
+//         temp[currentLength + 1] = '\0';
+//         line = temp;
+//     }
+//     if (bytesRead == -1)
+//         return (NULL);
+//     return (line);
+// }
 
-int main(void)
-{
-    char *line;
+// int main(void)
+// {
+//     char *line;
 
-    int fd = open("test.txt", O_CREAT | O_RDWR, 0777);
-    while ((line = read_line(fd)) != NULL)
-    {
-        printf("%s\n", line);
-    }
-    close(fd);
-}
-
+//     int fd = open("test.txt", O_CREAT | O_RDWR, 0777);
+// 	write(fd, "Hello this is a test\nI write into this file using write\nand this is the third line\nand this is the fourth", 105);
+// 	lseek(fd, 0, SEEK_SET);
+//     while ((line = read_line(fd)) != NULL)
+//     {
+//         printf("%s\n", line);
+//     }
+//     close(fd);
+// }
