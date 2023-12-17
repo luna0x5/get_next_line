@@ -6,7 +6,7 @@
 /*   By: hmoukit < hmoukit@student.1337.ma>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 09:40:01 by hmoukit           #+#    #+#             */
-/*   Updated: 2023/12/16 16:30:47 by hmoukit          ###   ########.fr       */
+/*   Updated: 2023/12/17 16:19:52 by hmoukit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,23 @@ char	*ft_strcpy(char *dst, char *src)
 	return (dst);
 }
 
+char	*ft_strncpy(char *dst, char *src, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (dst == NULL && (src == NULL || dst == NULL))
+		return (NULL);
+	if (src == NULL)
+		return (dst);
+	while (dst[i] && src[i] && i < n)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -82,7 +99,7 @@ char	*ft_strchr(const char *s, int c)
 		return (&s1[i]);
 	return (NULL);
 }
-#include <string.h>
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	s1len;
@@ -92,15 +109,15 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (s1 == NULL && s2 == NULL)
 		return (NULL);
 	if (s1 == NULL)
-		return (strdup(s2));
+		return (ft_strdup(s2));
 	if (s2 == NULL)
-		return (strdup(s1));
-	s1len = strlen(s1);
-	s2len = strlen(s2);
+		return (ft_strdup(s1));
+	s1len = ft_strlen(s1);
+	s2len = ft_strlen(s2);
 	s = (char *)malloc((s1len + s2len + 1) * (sizeof(char)));
 	if (s == NULL)
 		return (NULL);
-	strcpy(s, s1);
-	strcpy(s + s1len, s2);
+	ft_strcpy(s, s1);
+	ft_strcpy(s + s1len, s2);
 	return (s);
 }
