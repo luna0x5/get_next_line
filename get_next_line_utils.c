@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmoukit < hmoukit@student.1337.ma>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/20 17:18:45 by hmoukit           #+#    #+#             */
+/*   Updated: 2023/12/20 18:38:31 by hmoukit          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
@@ -77,7 +89,7 @@ char	*ft_strchr(const char *s, int c)
 		return (&s1[i]);
 	return (NULL);
 }
-// #include <string.h>
+
 // char    *ft_strjoin(char *s1, char *s2)
 // {
 //     size_t    s1len;
@@ -94,7 +106,7 @@ char	*ft_strchr(const char *s, int c)
 //     s = (char *)malloc((s1len + s2len + 1) * (sizeof(char)));
 //     if (s == NULL)
 //         return (NULL);
-//     strcpy(s, s1);
-//     strcpy(s + s1len, s2);
+//     ft_strcpy(s, s1);
+//     ft_strcpy(s + s1len, s2);
 //     return (s);
 // }

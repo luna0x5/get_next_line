@@ -1,9 +1,17 @@
-#include <stdlib.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmoukit < hmoukit@student.1337.ma>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/20 17:19:14 by hmoukit           #+#    #+#             */
+/*   Updated: 2023/12/20 18:40:29 by hmoukit          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
 #include <string.h>
-#include <fcntl.h>
-#include <stdio.h>
-# define BUFFER_SIZE 100000000
 char    *ft_strjoin(char *s1, char *s2)
 {
     size_t    s1len;
@@ -87,14 +95,10 @@ char    *get_next_line(int fd)
 	free(buffer);
     return (line);
 }
-// void f(void)
-// {
-// 	system("leaks a.out");
-// }
+#include <stdio.h>
+#include <fcntl.h>
 int main()
 {
-	// atexit(f);
-	//printf("anything");
 	int i = 1;
     int fd = open("test1.txt", O_CREAT | O_RDWR, 0777);
 	char *line;
