@@ -6,7 +6,7 @@
 /*   By: hmoukit < hmoukit@student.1337.ma>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:18:45 by hmoukit           #+#    #+#             */
-/*   Updated: 2023/12/20 18:38:31 by hmoukit          ###   ########.fr       */
+/*   Updated: 2023/12/23 06:37:00 by hmoukit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strdup(const char *s1)
 	size_t	i;
 
 	len = ft_strlen(s1);
-	dst = (char *)malloc(sizeof(char) * (len + 1));
+	dst = malloc(len + 1);
 	if (dst == NULL)
 		return (NULL);
 	i = 0;
@@ -47,7 +47,7 @@ char	*ft_strcpy(char *dst, char *src)
 	size_t	i;
 
 	i = 0;
-	while(src[i] && dst[i])
+	while(src[i])
 	{
 		dst[i] = src[i];
 		i++;
@@ -61,7 +61,7 @@ char	*ft_strncpy(char *dst, char *src, size_t len)
 	size_t	i;
 
 	i = 0;
-	while(src[i] && dst[i] && i < len)
+	while(src[i] && i < len)
 	{
 		dst[i] = src[i];
 		i++;
@@ -90,23 +90,30 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-// char    *ft_strjoin(char *s1, char *s2)
-// {
-//     size_t    s1len;
-//     size_t    s2len;
-//     char    *s;
-//     if (s1 == NULL && s2 == NULL)
-//         return (NULL);
-//     if (s1 == NULL)
-//         return (ft_strdup(s2));
-//     if (s2 == NULL)
-//         return (ft_strdup(s1));
-//     s1len = ft_strlen(s1);
-//     s2len = ft_strlen(s2);
-//     s = (char *)malloc((s1len + s2len + 1) * (sizeof(char)));
-//     if (s == NULL)
-//         return (NULL);
-//     ft_strcpy(s, s1);
-//     ft_strcpy(s + s1len, s2);
-//     return (s);
-// }
+char    *ft_strjoin(char *s1, char *s2)
+{
+    size_t    s1len;
+    size_t    s2len;
+    char    *s;
+
+    if (s1 == NULL && s2 == NULL)
+        return (NULL);
+    if (s1 == NULL)
+    {
+		s1 = ft_strdup(s2);
+		return (s1);
+	}
+    if (s2 == NULL)
+	{
+		s2 = ft_strdup(s1);
+		return (s2);
+	}
+    s1len = ft_strlen(s1);
+    s2len = ft_strlen(s2);
+    s = malloc(s1len + s2len + 1);
+    if (s == NULL)
+        return (NULL);
+    ft_strcpy(s, s1);
+    ft_strcpy(s + s1len, s2);
+    return (free(s1),s);
+}

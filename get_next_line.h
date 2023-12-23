@@ -6,7 +6,7 @@
 /*   By: hmoukit < hmoukit@student.1337.ma>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:16:12 by hmoukit           #+#    #+#             */
-/*   Updated: 2023/12/20 18:35:47 by hmoukit          ###   ########.fr       */
+/*   Updated: 2023/12/23 05:10:28 by hmoukit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 3
 # endif
 
 # include <unistd.h>
