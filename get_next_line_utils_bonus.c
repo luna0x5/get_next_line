@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoukit < hmoukit@student.1337.ma>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/20 17:18:45 by hmoukit           #+#    #+#             */
-/*   Updated: 2023/12/26 18:41:48 by hmoukit          ###   ########.fr       */
+/*   Created: 2023/12/26 17:18:37 by hmoukit           #+#    #+#             */
+/*   Updated: 2023/12/26 17:41:32 by hmoukit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *s)
 {
@@ -54,8 +54,8 @@ char	*ft_strndup(char *s1, size_t len)
 	if (!s1)
 		return (NULL);
 	dst = malloc(len + 1);
-	if (!dst)
-		return (NULL);
+	if (dst == NULL)
+		return (s1 = NULL, NULL);
 	i = 0;
 	while (s1[i] && i < len)
 	{

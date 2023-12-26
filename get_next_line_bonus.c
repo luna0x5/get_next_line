@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoukit < hmoukit@student.1337.ma>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/20 17:19:14 by hmoukit           #+#    #+#             */
-/*   Updated: 2023/12/26 18:55:20 by hmoukit          ###   ########.fr       */
+/*   Created: 2023/12/26 17:14:42 by hmoukit           #+#    #+#             */
+/*   Updated: 2023/12/26 19:02:32 by hmoukit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -116,7 +115,7 @@ char	*make_line(char **buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[OPEN_MAX];
 	char		*line;
 	char		*temp;
 
@@ -124,18 +123,18 @@ char	*get_next_line(int fd)
 	temp = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		if (buffer)
+		if (buffer[fd])
 		{
-			free(buffer);
-			buffer = NULL;
+			free(buffer[fd]);
+			buffer[fd] = NULL;
 		}
 		return (NULL);
 	}
 	temp = read_line(fd);
-	buffer = ft_strjoin(buffer, temp);
-	if (!buffer)
+	buffer[fd] = ft_strjoin(buffer[fd], temp);
+	if (!buffer[fd])
 		return (free(temp), temp = NULL, NULL);
-	line = make_line(&buffer);
-	buffer = rest_buffer(buffer);
+	line = make_line(&buffer[fd]);
+	buffer[fd] = rest_buffer(buffer[fd]);
 	return (free(temp), temp = NULL, line);
 }
