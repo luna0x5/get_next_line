@@ -6,11 +6,10 @@
 /*   By: hmoukit < hmoukit@student.1337.ma>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:19:14 by hmoukit           #+#    #+#             */
-/*   Updated: 2023/12/26 18:55:20 by hmoukit          ###   ########.fr       */
+/*   Updated: 2023/12/27 22:35:41 by hmoukit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "get_next_line.h"
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -48,20 +47,20 @@ char	*read_line(int fd)
 
 	count = 1;
 	all_buffer = NULL;
-	buffer = malloc(BUFFER_SIZE + 1);
+	buffer = malloc((size_t)BUFFER_SIZE + 1);
 	if (!buffer)
-		return (NULL);
+		return ((char *)1);
 	while (count > 0)
 	{
 		count = read(fd, buffer, BUFFER_SIZE);
 		if (count < 0)
-			return (free(buffer), buffer = NULL, NULL);
+			return (free(buffer), buffer = NULL, (char *)1);
 		buffer[count] = '\0';
 		if (count == 0)
 			break ;
 		all_buffer = ft_strjoin(all_buffer, buffer);
 		if (!all_buffer)
-			return (free(buffer), buffer = NULL, NULL);
+			return (free(buffer), buffer = NULL, (char *)1);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
@@ -125,13 +124,16 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
 		if (buffer)
-		{
-			free(buffer);
-			buffer = NULL;
-		}
+			return (free(buffer), buffer = NULL, NULL);
 		return (NULL);
 	}
 	temp = read_line(fd);
+	if (temp == (char *)1)
+	{
+		if (buffer)
+			return (free(buffer), buffer = NULL, NULL);
+		return (NULL);
+	}
 	buffer = ft_strjoin(buffer, temp);
 	if (!buffer)
 		return (free(temp), temp = NULL, NULL);
